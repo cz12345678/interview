@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<property resource="props/config.properties"/>
+    <property resource="props/logback.properties"/>
+    
+	<define name="LOG_HOME" class="com.my.logback.LogbackHomeGetProperty"/> 
+
+<!-- 	<property name="LOG_HOME" value="d:\\dev\\logbak-sample\\log" /> -->
+    <define name="IP" class="com.my.logback.LogbackIpGetProperty"/>
+
+	<statusListener class="com.my.logback.statusListener.MyStatusListener"/>
+	
+	<!--配置控制台输出语句  -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${logback.console.level}</level>
+        </filter>
+        <Target>System.out</Target>
+        <encoder>
+        	<charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS , GMT+8} XXX--MY--XXX [%t] [%c{20}:%L]-[%p] %m%n</pattern>
+        </encoder>
+    </appender>
+    
+    
+    <!-- 日志输出文件 -->
+    <appender name="FILE_STDOUT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">              
+        <!-- 日志输出文件名 -->
+        <File>${LOG_HOME}/${server.name}_stdout.log</File>
+        <rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/${server.name}_stdout.%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
+			<!-- each file should be at most 500MB, keep 30days worth of history, 
+				but at most 20GB -->
+			<maxHistory>30</maxHistory>
+			<maxFileSize>500MB</maxFileSize>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS , GMT+8} XXX--MY--XXX [%t] [%c{20}:%L]-[%p] %m%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- 错误日志 -->
+    <appender name="FILE-ERROR"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <File>${LOG_HOME}/${server.name}_stderr.log</File>
+        <rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/${server.name}_stderr.%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
+			<!-- each file should be at most 500MB, keep 30days worth of history, 
+				but at most 20GB -->
+			<maxHistory>30</maxHistory>
+			<maxFileSize>500MB</maxFileSize>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss:SSS , GMT+8} XXX--MY--XXX [%t] [%c{20}:%L]-[%p] %m%n
+			</pattern>
+		</encoder>
+    </appender>
+    
+   <!-- jdbc相关日志输出 -->
+   <appender name="FILE-JDBC"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${logback.info.level}</level>
+        </filter>
+        <File>${LOG_HOME}/${server.name}_jdbc_${IP}.log</File>
+        <rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/${server.name}_jdbc_${IP}.%d{yyyy-MM-dd}.%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<maxFileSize>500MB</maxFileSize>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%-5level] [%-5thread]
+				%logger{20} -%msg%n</pattern>
+		</encoder>
+    </appender>
+    
+    
+    <!-- my -->
+    <logger name="com.my.logback" level="${logback.debug.level}"/>
+    <logger name="com.lzh" level="${logback.info.level}"/>
+
+    <!-- framework -->
+    <logger name="org.apache" level="${logback.error.level}"/>
+    <logger name="org.springframework" level="${logback.error.level}"/>
+    <logger name="org.quartz" level="${logback.error.level}"/>
+    <logger name="org.hibernate" level="${logback.error.level}"/>
+    
+    
+    <!-- sql -->
+    <logger name="java.sql.Connection" level="${logback.error.level}"/>
+    <logger name="java.sql.Statement" level="${logback.error.level}"/>
+    <logger name="java.sql.PreparedStatement" level="${logback.error.level}"/>
+    <logger name="java.sql.ResultSet" level="${logback.error.level}"/>
+    <logger name="jdbc.audit" level="${logback.error.level}"/>
+    <logger name="jdbc.resultset" level="${logback.error.level}"/>
+    <logger name="jdbc.resultsettable" level="${logback.error.level}"/>
+    <logger name="jdbc.connection" level="${logback.error.level}"/>
+    <logger name="jdbc.sqlonly" level="${logback.error.level}"/>
+
+	
+	<logger name="com.my.test" level="${logback.info.level}" additivity="false">
+        <appender-ref ref="FILE-ERROR"/>
+        <appender-ref ref="FILE_STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+	
+	
+	<root level="${logback.root.level}">
+        <appender-ref ref="FILE-ERROR"/>
+        <appender-ref ref="FILE_STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+
+</configuration>
