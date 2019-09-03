@@ -13,4 +13,11 @@ public class HelloController {
     public String hello(){
         return "Hello World!";
     }
+
+
+    @RequestMapping({"/", "index", "index.html"})
+    public String myTest(){
+        System.err.println("xxxxxxxxxxxx");
+        return "index";
+    }
 }

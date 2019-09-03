@@ -26,6 +26,9 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/atguigu").setViewName("success");
     }
 
+
+
+
     //所有的WebMvcConfigurerAdapter组件都会一起起作用
     @Bean //将组件注册在容器
     public WebMvcConfigurerAdapter webMvcConfigurerAdapter(){
