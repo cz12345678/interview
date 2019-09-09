@@ -12,4 +12,6 @@ public class ErrorSpringBootApplication {
         SpringApplication.run(ErrorSpringBootApplication.class,args);
     }
 
+
+
 }

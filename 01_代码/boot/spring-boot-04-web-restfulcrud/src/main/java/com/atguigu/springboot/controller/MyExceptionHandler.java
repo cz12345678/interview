@@ -1,6 +1,7 @@
 package com.atguigu.springboot.controller;
 
 import com.atguigu.springboot.exception.UserNotExistException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,7 @@ public class MyExceptionHandler {
          * Integer statusCode = (Integer) request
          .getAttribute("javax.servlet.error.status_code");
          */
-        request.setAttribute("javax.servlet.error.status_code",500);
+        request.setAttribute("javax.servlet.error.status_code", HttpStatus.INTERNAL_SERVER_ERROR);
         map.put("code","user.notexist");
         map.put("message","用户出错啦");
 
