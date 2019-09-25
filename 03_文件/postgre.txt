@@ -1,0 +1,18 @@
+    插入或更新的mybatis
+	
+	<insert id="batchInsert" parameterType="com.thunisoft.portal.tsfx.bean.TsfxAjtzsl">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE db_mh.t_tsfx_ajtzslb
+                SET n_sl = (n_sl + #{item.sl}) , dt_zhxgsj = #{item.zhxgsj} WHERE c_sjbs = #{item.sjbs};
+            INSERT INTO db_mh.t_tsfx_ajtzslb
+                (
+                    c_bh, c_sjbs, n_dqbh, d_sxrq, c_tzlx1, c_tzlx2, c_tzlx3, c_tzlx4, n_wd, n_sl, dt_cjsj, dt_zhxgsj
+                )
+            SELECT
+                #{item.bh}, #{item.sjbs}, #{item.dqbh}, #{item.sxrq},  #{item.tzlx1}, #{item.tzlx2},
+                #{item.tzlx3}, #{item.tzlx4}, #{item.wd}, #{item.sl}, #{item.cjsj}, #{item.zhxgsj}
+            WHERE NOT EXISTS (SELECT 1 FROM db_mh.t_tsfx_ajtzslb WHERE c_sjbs = #{item.sjbs});
+
+        </foreach>
+
+    </insert>
