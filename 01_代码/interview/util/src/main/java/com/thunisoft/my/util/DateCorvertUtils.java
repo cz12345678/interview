@@ -223,6 +223,30 @@ public class DateCorvertUtils {
     }
 
 
+	/**
+	 * 获得当前季度开始时间
+	 *
+	 * @return
+	 */
+	public static LocalDateTime getCurrentQuarterStartTime01() {
+		LocalDate date = LocalDate.now();
+		Month firstMonthOfQuarter = date.getMonth().firstMonthOfQuarter();
+		LocalDateTime start = LocalDateTime.of(LocalDate.of(date.getYear(), firstMonthOfQuarter, 1), LocalTime.MIN);		
+		return start;		
+	}
+	
+		/**
+	 * 获得当季度结束时间
+	 *
+	 * @return
+	 */
+	public static LocalDateTime getCurrentQuarterEndTime01() {
+		LocalDate date = LocalDate.now();
+		Month firstMonthOfQuarter = date.getMonth().firstMonthOfQuarter();
+		Month endMonthOfQuarter = Month.of(firstMonthOfQuarter.getValue() + 2);
+		LocalDateTime end = LocalDateTime.of(LocalDate.of(date.getYear(), endMonthOfQuarter, endMonthOfQuarter.length(date.isLeapYear())),LocalTime.MAX);
+		return end;
+	}
 
 
 
