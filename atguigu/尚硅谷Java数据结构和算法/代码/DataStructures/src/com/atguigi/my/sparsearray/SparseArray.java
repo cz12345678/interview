@@ -141,7 +141,7 @@ public class SparseArray {
 
     /**
      * 遍历二维数组
-     * @param array
+     * @param arrays
      */
     private static void traverseArray(int[][] arrays){
         for (int[] array: arrays) {
