@@ -1,24 +1,24 @@
-package src.com.atguigi.my.linkedList;
+package com.atguigi.my.linkedList;
 
 public class DoubleLinkedListDemo {
 
     public static void main(String[] args) {
         DoubleLikedList list1 = getDoubleLikedList();
-//        list1.list();
+        list1.list();
 //
 //        Node node = new Node(0,"xxxxx","xxxxx");
 //
 //        list1.update(node);
 
-        list1.list();
+//        list1.list();
 
 //        System.err.println(list1.size());
 
-        System.err.println();
-
-        list1.delete(new Node(91,"xx","ee"));
-
-        list1.list();
+//        System.err.println();
+//
+//        list1.delete(new Node(91,"xx","ee"));
+//
+//        list1.list();
 
     }
 
@@ -43,11 +43,11 @@ public class DoubleLinkedListDemo {
         list1.addByOrder(node8);
         list1.addByOrder(node7);
         list1.addByOrder(node6);
-        list1.addByOrder(node4);
         list1.addByOrder(node5);
+        list1.addByOrder(node4);
+        list1.addByOrder(node3);
         list1.addByOrder(node2);
         list1.addByOrder(node1);
-        list1.addByOrder(node3);
         return list1;
     }
 
@@ -127,6 +127,7 @@ class DoubleLikedList{
                 }
                 break;
             }
+
             // 节点需要添加到队中
             if (node.getNo() < temp.getNo()){
                 next = temp;
