@@ -1,4 +1,4 @@
-package com.thunisoft.learn1.sort.quick;
+package com.atguigu.sort;
 
 import java.util.Arrays;
 
@@ -10,7 +10,7 @@ public class QuickSort02 {
         int[] array = new int[25];
 
         for (int i = 0; i < array.length; i++) {
-            array[i] = (int) (Math.random() * 100);
+            array[i] = (int) (Math.random() * 1000);
             System.out.print(array[i] + "\t");
         }
         System.out.println();

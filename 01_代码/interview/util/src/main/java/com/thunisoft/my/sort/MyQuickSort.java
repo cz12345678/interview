@@ -3,9 +3,9 @@ package com.thunisoft.test.sort;
 public class MyQuickSort {
 
     public static void main(String[] args) {
-        int[] arrays = new int[20];
+        int[] arrays = new int[30];
         for (int i = 0; i < arrays.length; i++){
-            arrays[i] = (int)(Math.random() * 100);
+            arrays[i] = (int)(Math.random() * 800);
         }
 
         for (int i : arrays){
