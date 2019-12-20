@@ -112,7 +112,7 @@ class ThreadedBinaryTree {
 			node.setLeftType(1);
 		}
 		
-		//处理后继结点
+		//处理后继结点（将当前节点作为上一个节点的后继节点）
 		if (pre != null && pre.getRight() == null) {
 			//让前驱结点的右指针指向当前结点
 			pre.setRight(node);
