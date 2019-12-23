@@ -1,0 +1,27 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /hello-world
+
+
+#配置文件注入
+person:
+  lastName: hello
+  age: 18
+  boss: false
+  birth: 2019/12/23
+  list1: [cat, dog, pig]
+  list2:
+    - cat
+    - dog
+    - pig
+  map1: {k1: v1, k2: v2}
+  map2:
+    k1: v1
+    k2: v2
+  dog:
+    name: herry
+    age: 12
+
+person3:
+  name: person3-name
