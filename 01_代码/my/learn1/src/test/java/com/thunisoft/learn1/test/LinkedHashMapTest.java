@@ -1,4 +1,4 @@
-package src.com.atguigi.my.test;
+package com.thunisoft.learn1.test;
 
 import java.util.*;
 
