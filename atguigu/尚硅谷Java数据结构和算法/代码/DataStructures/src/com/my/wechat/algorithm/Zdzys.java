@@ -32,3 +32,16 @@ public class Zdzys {
     }
 
 }
+
+
+class test{
+    public static void main(String[] args) {
+        long sum = 0;
+        long fac = 1;
+        for (int i = 1; i <= 4; i++) {
+            fac = fac * i;
+            sum += fac;
+        }
+        System.out.println(sum);
+    }
+}
